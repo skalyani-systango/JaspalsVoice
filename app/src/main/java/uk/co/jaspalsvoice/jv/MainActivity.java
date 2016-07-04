@@ -311,58 +311,107 @@ public class MainActivity extends AppCompatActivity implements SuggestionsAdapte
         keys.add('a');
         keys.add('b');
         keys.add('c');
+
+        keys.add('A');
+        keys.add('B');
+        keys.add('C');
         keyboard.put(2, keys);
 
         charMapping.put('a', 2);
         charMapping.put('b', 2);
         charMapping.put('c', 2);
 
+        charMapping.put('A', 2);
+        charMapping.put('B', 2);
+        charMapping.put('C', 2);
+
+
 
         keys = new HashSet<>();
         keys.add('d');
         keys.add('e');
         keys.add('f');
+
+        keys.add('D');
+        keys.add('E');
+        keys.add('F');
         keyboard.put(3, keys);
 
         charMapping.put('d', 3);
         charMapping.put('e', 3);
         charMapping.put('f', 3);
 
+        charMapping.put('D', 3);
+        charMapping.put('E', 3);
+        charMapping.put('F', 3);
+
+
         keys = new HashSet<>();
         keys.add('g');
         keys.add('h');
         keys.add('i');
+
+        keys.add('G');
+        keys.add('H');
+        keys.add('I');
         keyboard.put(4, keys);
 
         charMapping.put('g', 4);
         charMapping.put('h', 4);
         charMapping.put('i', 4);
 
+        charMapping.put('G', 4);
+        charMapping.put('H', 4);
+        charMapping.put('I', 4);
+
         keys = new HashSet<>();
         keys.add('j');
         keys.add('k');
         keys.add('l');
+
+        keys.add('J');
+        keys.add('K');
+        keys.add('L');
+
         keyboard.put(5, keys);
 
         charMapping.put('j', 5);
         charMapping.put('k', 5);
         charMapping.put('l', 5);
 
+        charMapping.put('J', 5);
+        charMapping.put('K', 5);
+        charMapping.put('L', 5);
+
+
         keys = new HashSet<>();
         keys.add('m');
         keys.add('n');
         keys.add('o');
+
+        keys.add('M');
+        keys.add('N');
+        keys.add('O');
         keyboard.put(6, keys);
 
         charMapping.put('m', 6);
         charMapping.put('n', 6);
         charMapping.put('o', 6);
 
+        charMapping.put('M', 6);
+        charMapping.put('N', 6);
+        charMapping.put('O', 6);
+
         keys = new HashSet<>();
         keys.add('p');
         keys.add('q');
         keys.add('r');
         keys.add('s');
+
+        keys.add('P');
+        keys.add('Q');
+        keys.add('R');
+        keys.add('S');
         keyboard.put(7, keys);
 
         charMapping.put('p', 7);
@@ -370,27 +419,51 @@ public class MainActivity extends AppCompatActivity implements SuggestionsAdapte
         charMapping.put('r', 7);
         charMapping.put('s', 7);
 
+        charMapping.put('P', 7);
+        charMapping.put('Q', 7);
+        charMapping.put('R', 7);
+        charMapping.put('S', 7);
+
+
         keys = new HashSet<>();
         keys.add('t');
         keys.add('u');
         keys.add('v');
+
+        keys.add('T');
+        keys.add('U');
+        keys.add('V');
         keyboard.put(8, keys);
 
         charMapping.put('t', 8);
         charMapping.put('u', 8);
         charMapping.put('v', 8);
 
+        charMapping.put('T', 8);
+        charMapping.put('U', 8);
+        charMapping.put('V', 8);
+
         keys = new HashSet<>();
         keys.add('w');
         keys.add('x');
         keys.add('y');
         keys.add('z');
+
+        keys.add('W');
+        keys.add('X');
+        keys.add('Y');
+        keys.add('Z');
         keyboard.put(9, keys);
 
         charMapping.put('w', 9);
         charMapping.put('x', 9);
         charMapping.put('y', 9);
         charMapping.put('z', 9);
+
+        charMapping.put('W', 9);
+        charMapping.put('X', 9);
+        charMapping.put('Y', 9);
+        charMapping.put('Z', 9);
     }
 
     private String encodeWord(String word) {
