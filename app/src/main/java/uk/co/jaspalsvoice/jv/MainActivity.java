@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements SuggestionsAdapte
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private static final boolean t9Enabled = true;
+    private static boolean t9Enabled = true;
 
     private String defaultSuggestion;
     private String savedTextMessage = "";
@@ -106,7 +106,18 @@ public class MainActivity extends AppCompatActivity implements SuggestionsAdapte
         }
     };
 
-    private View.OnClickListener onSuggestionListener = new View.OnClickListener() {
+    /*@Override
+    public View findViewById(int id) {
+        View view= super.findViewById(id);
+        if (view instanceof TextView){
+            *//*float a = ((TextView) view).getTextSize();
+            a += 120;*//*
+            ((TextView) view).setTextSize(200);
+        }
+        return view;
+    }*/
+
+    /*  private View.OnClickListener onSuggestionListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             String currentText = messageTextView.getText().toString();
@@ -121,6 +132,24 @@ public class MainActivity extends AppCompatActivity implements SuggestionsAdapte
             }
         }
     };
+*/
+
+
+    private View.OnClickListener onSuggestionListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (t9Enabled) {
+                currentHandler = new KeypadHandler(ContextCompat.getColor(MainActivity.this, R.color.colorAccent_40));
+                ((KeypadHandler) currentHandler).setListener(keyPadListener);
+                t9Enabled = false;
+            } else {
+                currentHandler = new T9Handler(ContextCompat.getColor(MainActivity.this, R.color.colorAccent_40));
+                ((T9Handler) currentHandler).setListener(keyPadListener);
+                t9Enabled = true;
+            }
+        }
+    };
+
 
     private View.OnClickListener changeCaseClickListener = new View.OnClickListener() {
         @Override
@@ -636,6 +665,7 @@ public class MainActivity extends AppCompatActivity implements SuggestionsAdapte
     private void initKeypadViews() {
         t9View = (TextView) keypadScene.getSceneRoot().findViewById(R.id.t_9);
         t9View.setActivated(t9Enabled);
+        t9View.setOnClickListener(onSuggestionListener);
 
         currentTextCaseView = (TextView) keypadScene.getSceneRoot().findViewById(R.id.text_case);
         messageTextView = (EditText) keypadScene.getSceneRoot().findViewById(R.id.message_text);
