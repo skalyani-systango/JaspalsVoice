@@ -126,5 +126,6 @@
     <string name="normal_font_text">Normal</string>
     <string name="large_font_text">Large</string>
     <string name="change_font_message">Please select the font size for the app</string>
+    <string name="add_gp_validation">Filling all the fields is mandatory</string>
 
 </resources>

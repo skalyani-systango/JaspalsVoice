@@ -39,7 +39,7 @@ public class FontSizeActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.smallRadioButton) {
-                    preferences.setFontSize(0.85f);
+                    preferences.setFontSize(0.75f);
                 } else if (checkedId == R.id.normalRadioButton) {
                     preferences.setFontSize(1f);
                 } else if (checkedId == R.id.largeRadioButton) {
