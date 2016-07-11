@@ -130,5 +130,8 @@
     <string name="gp_consultant_address">Consultant Address</string>
     <string name="gp_consultant_phone">Consultant Phone</string>
     <string name="gp_consultant_email">Consultant Email</string>
+    <string name="vitals_blood_pressure_title">Blood Pressure Record</string>
+    <string name="date_title">Date</string>
+    <string name="vitals_blood_pressure_subtitle">Blood Pressure</string>
 
 </resources>
