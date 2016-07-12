@@ -9,10 +9,10 @@ import uk.co.jaspalsvoice.jv.db.DbOpenHelper;
  */
 public class VitalsBloodPressure {
 
-    protected String bloodPressure;
-    protected String date;
-    protected String uuid;
-    protected String id;
+    public String bloodPressure;
+    public String date;
+    public String uuid;
+    public int id;
 
     public void setBloodPressure(String bloodPressure){
         this.bloodPressure = bloodPressure;
@@ -38,18 +38,18 @@ public class VitalsBloodPressure {
         return uuid;
     }
 
-    public void setId(String id){
+    public void setId(int id){
         this.id= id;
     }
 
-    public String getId(){
+    public int getId(){
         return id;
     }
 
     public ContentValues toContentValues() {
         ContentValues cv = new ContentValues();
-        cv.put(DbOpenHelper.COLUMN_B_UUID, getUuid());
-        cv.put(DbOpenHelper.COLUMN_B_ID, getId());
+       /* cv.put(DbOpenHelper.COLUMN_B_UUID, getUuid());
+        cv.put(DbOpenHelper.COLUMN_B_ID, getId());*/
         cv.put(DbOpenHelper.COLUMN_B_BLOODPRESSURE, getBloodPressure());
         cv.put(DbOpenHelper.COLUMN_B_DATE, getDate());
         return cv;

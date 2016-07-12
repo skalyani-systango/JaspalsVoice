@@ -133,5 +133,7 @@
     <string name="vitals_blood_pressure_title">Blood Pressure Record</string>
     <string name="date_title">Date</string>
     <string name="vitals_blood_pressure_subtitle">Blood Pressure</string>
+    <string name="key_vitals">Vitals</string>
+    <string name="no_content_bloodpressure">Currently there are no entries for blood pressure. Please click on the + icon above to add a new entry.</string>
 
 </resources>

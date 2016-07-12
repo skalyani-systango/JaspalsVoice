@@ -187,6 +187,43 @@ public class DbHelper {
     }
 
     /**
+     * Inserts blood pressures in the db.
+     */
+    public Future<Long> insertOrReplaceBloodPressure(final List<VitalsBloodPressure> bloodPressures,
+                                                     final boolean isUpdate, final int id) {
+        return executor.submit(new Callable<Long>() {
+            @Override
+            public Long call() throws Exception {
+                long insertedRows = 0;
+                try {
+                    sqlite.beginTransaction();
+                    for (VitalsBloodPressure bloodPressure: bloodPressures) {
+                        if (!isUpdate) {
+                            if (sqlite.insert(DbOpenHelper.TABLE_BLOOD_PRESSURE, null,
+                                    bloodPressure.toContentValues()) >= 0) {
+                                insertedRows++;
+                                Log.d(TAG, "Insert succeeded, inserted rows:" + insertedRows);
+                            }
+                        } else {
+                            String where = "id=?";
+                            String[] whereArgs = new String[]{String.valueOf(id)};
+                            if (sqlite.update(DbOpenHelper.TABLE_BLOOD_PRESSURE,
+                                    bloodPressure.toContentValues(), where, whereArgs) >= 0) {
+                                insertedRows++;
+                                Log.d(TAG, "Update succeeded, updated rows:" + insertedRows + id);
+                            }
+                        }
+                    }
+                    sqlite.setTransactionSuccessful();
+                    return insertedRows;
+                } finally {
+                    sqlite.endTransaction();
+                }
+            }
+        });
+    }
+
+    /**
      * Gets from db a list containing all doctors.
      */
     public Map<String, Doctor> readAllDoctors() {
@@ -258,7 +295,7 @@ public class DbHelper {
     }
 
     /**
-     * Gets from db a list containing all doctors.
+     * Gets from db a list containing all blood pressures.
      */
     public List<VitalsBloodPressure> readAllBloodPressures() {
         List<VitalsBloodPressure> bloodPressures = new ArrayList<>();
@@ -270,6 +307,7 @@ public class DbHelper {
                 if (allBloodPressures.moveToFirst()) {
                     while (!allBloodPressures.isAfterLast()) {
                         VitalsBloodPressure bloodPressure = new VitalsBloodPressure();
+                        bloodPressure.setId(allBloodPressures.getInt(allBloodPressures.getColumnIndex(DbOpenHelper.COLUMN_B_ID)));
                         bloodPressure .setBloodPressure(allBloodPressures.getString(allBloodPressures.getColumnIndex(DbOpenHelper.COLUMN_B_BLOODPRESSURE)));
                         bloodPressure .setDate(allBloodPressures.getString(allBloodPressures.getColumnIndex(DbOpenHelper.COLUMN_B_DATE)));
                         bloodPressures.add(bloodPressure);
