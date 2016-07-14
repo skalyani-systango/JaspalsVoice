@@ -98,6 +98,13 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     public static final String COLUMN_EA_ALLERGY= "allergy";
     public static final String COLUMN_EA_TYPE = "type";
 
+    // Table, columns
+    public static final String TABLE_DIAGNOSIS = "diagnosistable";
+    public static final String COLUMN_D_UUID = "uuid";
+    public static final String COLUMN_D_ID = "id";
+    public static final String COLUMN_D_DIAGNOSIS= "diagnosis";
+    public static final String COLUMN_D_DATE = "date";
+
 
 
     // Creation statement for TABLE_MEDICAL_TEAM
@@ -194,6 +201,14 @@ public class DbOpenHelper extends SQLiteOpenHelper {
             + COLUMN_EA_ALLERGY+ " TEXT, "
             + COLUMN_EA_TYPE + " TEXT);";
 
+    // Creation statement for TABLE_ENVIRONMENTAL_ALLERGIES
+    private static final String CREATE_TABLE_DIAGNOSIS= "CREATE TABLE "
+            + TABLE_DIAGNOSIS+ "("
+            + COLUMN_D_UUID + " TEXT, "
+            + COLUMN_D_ID + " INTEGER PRIMARY KEY, "
+            + COLUMN_D_DIAGNOSIS+ " TEXT, "
+            + COLUMN_D_DATE+ " TEXT);";
+
     public DbOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -210,6 +225,8 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_MEDICAL_ALLERGIES);
         db.execSQL(CREATE_TABLE_FOOD_ALLERGIES);
         db.execSQL(CREATE_TABLE_ENVIRONMENTAL_ALLERGIES);
+        db.execSQL(CREATE_TABLE_DIAGNOSIS);
+
 
     }
 

@@ -14,6 +14,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import uk.co.jaspalsvoice.jv.models.Diagnosis;
 import uk.co.jaspalsvoice.jv.models.Doctor;
 import uk.co.jaspalsvoice.jv.models.EnvironmentalAllergies;
 import uk.co.jaspalsvoice.jv.models.FoodAllergies;
@@ -110,6 +111,13 @@ public class DbHelper {
             DbOpenHelper.COLUMN_EA_ID,
             DbOpenHelper.COLUMN_EA_ALLERGY,
             DbOpenHelper.COLUMN_EA_TYPE,
+    };
+
+    private static final String[] DIAGNOSIS_COLUMN_NAMES = new String[]{
+            DbOpenHelper.COLUMN_D_UUID,
+            DbOpenHelper.COLUMN_D_ID,
+            DbOpenHelper.COLUMN_D_DIAGNOSIS,
+            DbOpenHelper.COLUMN_D_DATE,
     };
 
     public DbHelper(DbOpenHelper DbOpenHelper) {
@@ -338,6 +346,44 @@ public class DbHelper {
                             String where = "id=?";
                             String[] whereArgs = new String[]{String.valueOf(id)};
                             if (sqlite.update(DbOpenHelper.TABLE_WEIGHT,
+                                    weight.toContentValues(), where, whereArgs) >= 0) {
+                                insertedRows++;
+                                Log.d(TAG, "Update succeeded, updated rows:" + insertedRows + id);
+                            }
+                        }
+                    }
+                    sqlite.setTransactionSuccessful();
+                    return insertedRows;
+                } finally {
+                    sqlite.endTransaction();
+                }
+            }
+        });
+    }
+
+
+    /**
+     * Inserts diagnoses in the db.
+     */
+    public Future<Long> insertOrReplaceDiagnosis(final List<Diagnosis> diagnoses,
+                                              final boolean isUpdate, final int id) {
+        return executor.submit(new Callable<Long>() {
+            @Override
+            public Long call() throws Exception {
+                long insertedRows = 0;
+                try {
+                    sqlite.beginTransaction();
+                    for (Diagnosis weight: diagnoses) {
+                        if (!isUpdate) {
+                            if (sqlite.insert(DbOpenHelper.TABLE_DIAGNOSIS, null,
+                                    weight.toContentValues()) >= 0) {
+                                insertedRows++;
+                                Log.d(TAG, "Insert succeeded, inserted rows:" + insertedRows);
+                            }
+                        } else {
+                            String where = "id=?";
+                            String[] whereArgs = new String[]{String.valueOf(id)};
+                            if (sqlite.update(DbOpenHelper.TABLE_DIAGNOSIS,
                                     weight.toContentValues(), where, whereArgs) >= 0) {
                                 insertedRows++;
                                 Log.d(TAG, "Update succeeded, updated rows:" + insertedRows + id);
@@ -768,6 +814,40 @@ public class DbHelper {
         }
         return allergies;
     }
+
+    /**
+     * Gets from db a list containing all environmental allergies.
+     */
+    public List<Diagnosis> readAllDiagnosis() {
+        List<Diagnosis> diagnoses = new ArrayList<>();
+        Cursor allDiagnoses= null;
+        try {
+            allDiagnoses= readAllFuture(DbOpenHelper.TABLE_DIAGNOSIS,
+                    DIAGNOSIS_COLUMN_NAMES, DbOpenHelper.COLUMN_D_ID).get();
+            if (allDiagnoses != null) {
+                if (allDiagnoses.moveToFirst()) {
+                    while (!allDiagnoses.isAfterLast()) {
+                        Diagnosis diagnosis = new Diagnosis();
+                        diagnosis.setId(allDiagnoses.getInt(allDiagnoses.getColumnIndex(DbOpenHelper.COLUMN_D_ID)));
+                        diagnosis .setDiagnosis(allDiagnoses.getString(allDiagnoses.getColumnIndex(DbOpenHelper.COLUMN_D_DATE)));
+                        diagnosis .setDate(allDiagnoses.getString(allDiagnoses.getColumnIndex(DbOpenHelper.COLUMN_D_DATE)));
+                        diagnoses.add(diagnosis);
+                        allDiagnoses.moveToNext();
+                    }
+                }
+            }
+        } catch (InterruptedException e) {
+            Log.e(TAG, e.getMessage(), e);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } finally {
+            if (allDiagnoses != null) {
+                allDiagnoses.close();
+            }
+        }
+        return diagnoses;
+    }
+
 
 
 

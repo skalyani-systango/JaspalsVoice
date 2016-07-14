@@ -153,6 +153,7 @@
     <string name="no_content_food_allergies">Currently there are no entries for food allergies. Please click on the + icon above to add a new entry.</string>
     <string name="no_content_environmental_allergies">Currently there are no entries for environmental allergies. Please click on the + icon above to add a new entry.</string>
     <string name="title_activity_medical_diagnosis">MedicalDiagnosisActivity</string>
+    <string name="no_content_diagnosis" />
 
 
 </resources>
