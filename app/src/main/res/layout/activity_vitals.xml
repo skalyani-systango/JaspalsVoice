@@ -18,6 +18,31 @@
             android:id="@+id/bloodPressureCardView"
             android:elevation="@dimen/elevation"
             app:cardUseCompatPadding="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <uk.co.jaspalsvoice.jv.views.VitalsBloodGlucoseCardView
+            android:id="@+id/bloodGlucoseCardView"
+            android:elevation="@dimen/elevation"
+            app:cardUseCompatPadding="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <uk.co.jaspalsvoice.jv.views.VitalsHeightCardView
+            android:id="@+id/heightCardView"
+            android:elevation="@dimen/elevation"
+            app:cardUseCompatPadding="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <uk.co.jaspalsvoice.jv.views.VitalsWeightCardView
+            android:id="@+id/weightCardView"
+            android:elevation="@dimen/elevation"
+            app:cardUseCompatPadding="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
