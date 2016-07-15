@@ -7,23 +7,23 @@ import uk.co.jaspalsvoice.jv.db.DbOpenHelper;
 /**
  * Created by Srinivas Kalyani on 11 Jul 16.
  */
-public class Diagnosis {
+public class SurgicalHistory {
 
-   private String diagnosis;
+   private String surgicalHistory;
    private String date;
    private String uuid;
    private int id;
 
-    public void setDiagnosis(String diagnosis){
-        this.diagnosis = diagnosis;
+    public void setSurgicalHistory(String surgicalHistory){
+        this.surgicalHistory = surgicalHistory;
     }
 
     public void setDate (String date){
         this.date = date;
     }
 
-    public String getDiagnosis(){
-        return diagnosis;
+    public String getSurgicalHistory(){
+        return surgicalHistory;
     }
 
     public String getDate(){
@@ -50,8 +50,8 @@ public class Diagnosis {
         ContentValues cv = new ContentValues();
        /* cv.put(DbOpenHelper.COLUMN_B_UUID, getUuid());
         cv.put(DbOpenHelper.COLUMN_B_ID, getId());*/
-        cv.put(DbOpenHelper.COLUMN_D_DIAGNOSIS, getDiagnosis());
-        cv.put(DbOpenHelper.COLUMN_D_DATE, getDate());
+        cv.put(DbOpenHelper.COLUMN_SH_HISTORY, getSurgicalHistory());
+        cv.put(DbOpenHelper.COLUMN_SH_DATE, getDate());
         return cv;
     }
 }

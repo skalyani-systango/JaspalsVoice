@@ -63,13 +63,12 @@ public class DiagnosisAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        Diagnosis diagnosis = diagnosiss.get(position);
+        final Diagnosis diagnosis = diagnosiss.get(position);
         if (diagnosis != null) {
-            ((DiagnosesActivity)context).setDiagnosisId(diagnosis.getId());
-            ((DiagnosisViewHolder) holder).diagnosisTextView.setText(diagnosis.diagnosis);
-            ((DiagnosisViewHolder) holder).dateTextView.setText(diagnosis.date);
-            ((DiagnosisViewHolder) holder).diagnosisEdittext.setText(diagnosis.diagnosis);
-            ((DiagnosisViewHolder) holder).dateText.setText(diagnosis.date);
+            ((DiagnosisViewHolder) holder).diagnosisTextView.setText(diagnosis.getDiagnosis());
+            ((DiagnosisViewHolder) holder).dateTextView.setText(diagnosis.getDate());
+            ((DiagnosisViewHolder) holder).diagnosisEdittext.setText(diagnosis.getDiagnosis());
+            ((DiagnosisViewHolder) holder).dateText.setText(diagnosis.getDate());
         } else {
             ((DiagnosisViewHolder) holder).diagnosisTextView.setText("");
             ((DiagnosisViewHolder) holder).dateTextView.setText("");
@@ -86,6 +85,7 @@ public class DiagnosisAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ((DiagnosisViewHolder) holder).saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((DiagnosesActivity)context).setDiagnosisId(diagnosis.getId());
                 updateData(((DiagnosisViewHolder)holder).diagnosisEdittext.getText().toString(),
                         ((DiagnosisViewHolder)holder).dateText.getText().toString());
                 ((DiagnosisViewHolder) holder).diagnosisTextView.setText(
