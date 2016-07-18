@@ -19,9 +19,9 @@ public class PersonalDetailsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_personal_details);
+        setContentView(R.layout.personal_details_activity);
 
-        EditableCardView firstName = (EditableCardView) findViewById(R.id.pd_first_name);
+       /* EditableCardView firstName = (EditableCardView) findViewById(R.id.pd_first_name);
         firstName.setTitle(getString(R.string.personal_details_first_name));
         firstName.setTitleId(R.string.personal_details_first_name);
         firstName.setText(preferences.getPersonalDetailsFirstName());
@@ -89,11 +89,11 @@ public class PersonalDetailsActivity extends BaseActivity {
         String[] answers = getResources().getStringArray(R.array.gender_spinner);
         gender.setText(preferences.getGender() ? answers[0] : answers[1]);
 
-        /*EditableCardView gender = (EditableCardView) findViewById(R.id.pd_gender);
+        *//*EditableCardView gender = (EditableCardView) findViewById(R.id.pd_gender);
         gender.setTitle(getString(R.string.personal_details_gender));
         gender.setTitleId(R.string.personal_details_gender);
         gender.setText(preferences.getPersonalDetailGender());
-*/
+*//*
         EditableCardView carerLanguage = (EditableCardView) findViewById(R.id.pd_language_of_carer);
         carerLanguage.setTitle(getString(R.string.personal_details_carer_language));
         carerLanguage.setTitleId(R.string.personal_details_carer_language);
@@ -103,6 +103,6 @@ public class PersonalDetailsActivity extends BaseActivity {
         translatorNeeded.setTitle(getString(R.string.personal_details_translator_needed));
         translatorNeeded.setTitleId(R.string.personal_details_translator_needed);
         answers = getResources().getStringArray(R.array.yes_no_spinner_item);
-        translatorNeeded.setText(preferences.getPersonalDetailsNeedTranslator() ? answers[0] : answers[1]);
+        translatorNeeded.setText(preferences.getPersonalDetailsNeedTranslator() ? answers[0] : answers[1]);*/
     }
 }
