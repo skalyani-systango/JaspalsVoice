@@ -4,7 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 
+import uk.co.jaspalsvoice.jv.JvApplication;
 import uk.co.jaspalsvoice.jv.R;
 import uk.co.jaspalsvoice.jv.views.AddressCardView;
 import uk.co.jaspalsvoice.jv.views.EditableCardView;
@@ -15,13 +21,121 @@ import uk.co.jaspalsvoice.jv.views.YesNoCardView;
  */
 public class PersonalDetailsActivity extends BaseActivity {
 
+    EditText firstName;
+    EditText lastName;
+    EditText preferredName;
+    EditText dob;
+    EditText streetAddress;
+    EditText townAddress;
+    EditText state;
+    EditText postalCode;
+    EditText country;
+    EditText homeTelephone;
+    EditText mobileNumber;
+    EditText email;
+    EditText nextOfKin;
+    EditText liveWith;
+    EditText mainCarer;
+    EditText carerLang;
+    EditText carerTel;
+    EditText firstLang;
+    Spinner genderSpinner;
+    Spinner translatorNeededSpinner;
+    LinearLayout buttonsLayout;
+    Button savebutton;
+    Button cancelButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.personal_details_activity);
+        initViews();
+        initSpinners();
+        attachListeners();
+        loadData();
+    }
 
-       /* EditableCardView firstName = (EditableCardView) findViewById(R.id.pd_first_name);
+    private void loadData() {
+        firstName.setText(preferences.getPersonalDetailsFirstName());
+        lastName.setText(preferences.getPersonalDetailsLastName());
+        preferredName.setText(preferences.getPersonalDetailsPreferredName());
+        liveWith.setText(preferences.getPersonalDetailsLiveWith());
+        email.setText(preferences.getPersonalDetailsEmail());
+        dob.setText(preferences.getPersonalDetailsDateOfBirth());
+        mainCarer.setText(preferences.getPersonalDetailsMainCarer());
+        carerTel.setText(preferences.getPersonalDetailsCarerTel());
+        homeTelephone.setText(preferences.getPersonalDetailHomeTel());
+        mobileNumber.setText(preferences.getPersonalDetailMobile());
+        carerLang.setText(preferences.getCarerLanguage());
+    }
+
+    private void attachListeners() {
+        savebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveData();
+            }
+        });
+    }
+
+    private void saveData() {
+        preferences.setPersonalDetailsFirstName(firstName.getText().toString());
+        preferences.setPersonalDetailsLastName(lastName.getText().toString());
+        preferences.setPersonalDetailsPreferredName(preferredName.getText().toString());
+        preferences.setPersonalDetailsLiveWith(liveWith.getText().toString());
+        preferences.setPersonalDetailsEmail(email.getText().toString());
+        preferences.setPersonalDetailsDateOfBirth(dob.getText().toString());
+        preferences.setPersonalDetailsMainCarer(mainCarer.getText().toString());
+        preferences.setPersonalDetailsCarerTel(carerTel.getText().toString());
+        preferences.setHomeTelephone(homeTelephone.getText().toString());
+        preferences.setMobile(mobileNumber.getText().toString());
+        preferences.setCarerLanguage(carerLang.getText().toString());
+    }
+
+    private void initSpinners() {
+
+        ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.gender_spinner));
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genderSpinner.setAdapter(genderAdapter);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.yes_no_spinner_item));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        translatorNeededSpinner.setAdapter(adapter);
+
+    }
+
+    private void initViews() {
+        firstName = (EditText) findViewById(R.id.firstNameEdittext);
+        lastName = (EditText) findViewById(R.id.lastNameEdittext);
+        preferredName = (EditText) findViewById(R.id.preferredNameEdittext);
+        dob = (EditText) findViewById(R.id.dobEdittext);
+        streetAddress = (EditText) findViewById(R.id.streetEdittext);
+        townAddress = (EditText) findViewById(R.id.townEdittext);
+        state = (EditText) findViewById(R.id.countyEdittext);
+        postalCode = (EditText) findViewById(R.id.zipCodeEdittext);
+        country = (EditText) findViewById(R.id.countryEdittext);
+        homeTelephone = (EditText) findViewById(R.id.homeTelephoneEdittext);
+        mobileNumber = (EditText) findViewById(R.id.mobileNumberEdittext);
+        email = (EditText) findViewById(R.id.emailEdittext);
+        nextOfKin = (EditText) findViewById(R.id.nextOfKinEdittext);
+        liveWith = (EditText) findViewById(R.id.liveWithEdittext);
+        mainCarer = (EditText) findViewById(R.id.mainCarerEdittext);
+        carerLang = (EditText) findViewById(R.id.carerLanguageEdittext);
+        carerTel = (EditText) findViewById(R.id.carerTelEdittext);
+        firstLang = (EditText) findViewById(R.id.firstLanguageEdittext);
+        genderSpinner = (Spinner) findViewById(R.id.genderSpinner);
+        translatorNeededSpinner = (Spinner) findViewById(R.id.translatorNeededSpinner);
+        buttonsLayout = (LinearLayout) findViewById(R.id.buttons);
+        savebutton = (Button) findViewById(R.id.save);
+        cancelButton = (Button) findViewById(R.id.cancel);
+    }
+
+
+    /* EditableCardView firstName = (EditableCardView) findViewById(R.id.pd_first_name);
         firstName.setTitle(getString(R.string.personal_details_first_name));
         firstName.setTitleId(R.string.personal_details_first_name);
         firstName.setText(preferences.getPersonalDetailsFirstName());
@@ -104,5 +218,5 @@ public class PersonalDetailsActivity extends BaseActivity {
         translatorNeeded.setTitleId(R.string.personal_details_translator_needed);
         answers = getResources().getStringArray(R.array.yes_no_spinner_item);
         translatorNeeded.setText(preferences.getPersonalDetailsNeedTranslator() ? answers[0] : answers[1]);*/
-    }
+
 }
